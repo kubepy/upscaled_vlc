@@ -1,7 +1,12 @@
 #!/usr/bin/bash
 
 function help() {
-  echo "Usage: $0 /path/to/video.mp4"
+  echo "To play a video file:"
+  echo "    $0 /path/to/video.mp4"
+  echo "To view this help message:"
+  echo "    $0 --help"
+  echo "To check if all dependencies are installed:"
+  echo "    $0 --check-dependencies"
 }
 
 function check_args() {
@@ -11,6 +16,11 @@ function check_args() {
   fi
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     help
+    exit 0
+  fi
+  if [ "$1" = "-c" ] || [ "$1" = "--check-dependencies" ]; then
+    check_dependencies
+    echo "All dependencies are installed :)"
     exit 0
   fi
   if [ ! -f "$1" ]; then

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=Upscaled VLC
+Comment=VLC upscaled with gamescope
+Categories=Video;
+Icon=com.adilhanney.upscaled_vlc
+
+Exec=upscaled_vlc.sh %f
+Terminal=false
+MimeType=video/*;
