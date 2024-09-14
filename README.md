@@ -8,9 +8,11 @@ and FSR via Valve's
 
 ## Usage
 
-After installing,
+After [installing](#install),
 simply right click on a video in your file manager
 and open it with Upscaled VLC.
+
+<img src="https://github.com/user-attachments/assets/ee8ae007-0752-4bcf-b67e-0dd3b6ffb076" width="500" alt="The Open File window showing Upscaled VLC as an option.">
 
 ## Install
 
