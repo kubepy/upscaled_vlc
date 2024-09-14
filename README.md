@@ -31,11 +31,25 @@ and open it with Upscaled VLC.
     ./install.sh
     ```
 
-    Or alternatively, in one line:
+    Or alternatively, as a one-liner:
 
     ```bash
     wget -O - https://raw.githubusercontent.com/adil192/upscaled_vlc/main/install.sh | bash
     ```
+
+## Uninstall
+
+If you cloned the repo:
+```bash
+cd upscaled_vlc
+./uninstall.sh
+```
+
+Alternatively, as a one-liner:
+
+```bash
+wget -O - https://raw.githubusercontent.com/adil192/upscaled_vlc/main/uninstall.sh | bash
+```
 
 ## Disclaimer
 
