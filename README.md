@@ -12,6 +12,8 @@ After [installing](#install),
 simply right click on a video in your file manager
 and open it with Upscaled VLC.
 
+See [the gamescope repo](https://github.com/ValveSoftware/gamescope#keyboard-shortcuts) for the available keyboard controls.
+
 <img src="https://github.com/user-attachments/assets/ee8ae007-0752-4bcf-b67e-0dd3b6ffb076" width="500" alt="The Open File window showing Upscaled VLC as an option.">
 
 ## Install
