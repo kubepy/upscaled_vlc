@@ -60,7 +60,22 @@ VIDEO_FILE="$1"
 IFS=x read VIDEO_WIDTH VIDEO_HEIGHT <<< $(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$VIDEO_FILE")
 echo "Video resolution: ${VIDEO_WIDTH}x${VIDEO_HEIGHT}"
 
-IFS=x read SCREEN_WIDTH SCREEN_HEIGHT <<< $(xdpyinfo | grep dimensions | awk '{print $2}')
+# On multi-monitor setups, use the highest resolution monitor
+SCREEN_WIDTH=0
+SCREEN_HEIGHT=0
+for line in $(xrandr | grep "\*" | cut -d" " -f4); do
+  IFS=x read w h <<< $line
+  if [ $w -gt $SCREEN_WIDTH ] || [ $h -gt $SCREEN_HEIGHT ]; then
+    SCREEN_WIDTH=$w
+    SCREEN_HEIGHT=$h
+  fi
+done
+if [ $SCREEN_WIDTH -eq 0 ] || [ $SCREEN_HEIGHT -eq 0 ]; then
+  echo "Failed to detect screen resolution, using 1920x1080..."
+  echo "Please file a bug report at https://github.com/adil192/upscaled_vlc/issues"
+  SCREEN_WIDTH=1920
+  SCREEN_HEIGHT=1080
+fi
 echo "Screen resolution: ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
 
 # Set VIDEO_WIDTH to match screen's aspect ratio
