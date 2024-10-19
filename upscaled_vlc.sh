@@ -82,9 +82,15 @@ echo "Screen resolution: ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
 VIDEO_WIDTH=$((VIDEO_HEIGHT * SCREEN_WIDTH / SCREEN_HEIGHT))
 echo "Adjusted video resolution: ${VIDEO_WIDTH}x${VIDEO_HEIGHT}"
 
-gamescope \
-  -w "$VIDEO_WIDTH" -h "$VIDEO_HEIGHT" \
-  -W "$SCREEN_WIDTH" -H "$SCREEN_HEIGHT" \
-  -F fsr \
-  -f \
-  -- vlc -f "$VIDEO_FILE"
+if [ $VIDEO_WIDTH -lt $SCREEN_WIDTH ] || [ $VIDEO_HEIGHT -lt $SCREEN_HEIGHT ]; then
+  echo "Enabling upscaling..."
+  gamescope \
+    -w "$VIDEO_WIDTH" -h "$VIDEO_HEIGHT" \
+    -W "$SCREEN_WIDTH" -H "$SCREEN_HEIGHT" \
+    -F fsr \
+    -f \
+    -- vlc -f "$VIDEO_FILE"
+else
+  echo "Skipping upscaling, using VLC as-is..."
+  vlc -f "$VIDEO_FILE"
+fi
