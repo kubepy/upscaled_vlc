@@ -32,7 +32,9 @@ function cp_or_symlink() {
   fi
 }
 
+mkdir -p ~/.local/bin/
 cp_or_symlink "$PROJECT_DIR/upscaled_vlc.sh" ~/.local/bin/
+mkdir -p ~/.local/share/applications/
 cp_or_symlink "$PROJECT_DIR/com.adilhanney.upscaled_vlc.desktop" ~/.local/share/applications/
 mkdir -p ~/.local/share/icons/hicolor/scalable/apps/
 cp_or_symlink "$PROJECT_DIR/com.adilhanney.upscaled_vlc.svg" ~/.local/share/icons/hicolor/scalable/apps/
