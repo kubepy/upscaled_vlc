@@ -58,6 +58,11 @@ check_dependencies
 VIDEO_FILE="$1"
 
 IFS=x read VIDEO_WIDTH VIDEO_HEIGHT <<< $(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$VIDEO_FILE")
+if [ -z "$VIDEO_WIDTH" ] || [ -z "$VIDEO_HEIGHT" ]; then
+  echo "Failed to detect video resolution, defaulting to 1920x1080. Please file a bug report at https://github.com/adil192/upscaled_vlc/issues"
+  VIDEO_WIDTH=1920
+  VIDEO_HEIGHT=1080
+fi
 echo "Video resolution: ${VIDEO_WIDTH}x${VIDEO_HEIGHT}"
 
 # On multi-monitor setups, use the highest resolution monitor
