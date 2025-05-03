@@ -83,6 +83,7 @@ if [ $VIDEO_WIDTH -lt $SCREEN_WIDTH ] || [ $VIDEO_HEIGHT -lt $SCREEN_HEIGHT ]; t
   gamescope \
     -w "$VIDEO_WIDTH" -h "$VIDEO_HEIGHT" \
     -W "$SCREEN_WIDTH" -H "$SCREEN_HEIGHT" \
+    --backend sdl \
     -F fsr \
     -f \
     -- vlc -f "$VIDEO_FILE"
