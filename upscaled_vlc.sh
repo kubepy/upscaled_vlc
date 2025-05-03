@@ -78,10 +78,6 @@ if [ $SCREEN_WIDTH -eq 0 ] || [ $SCREEN_HEIGHT -eq 0 ]; then
 fi
 echo "Screen resolution: ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
 
-# Set VIDEO_WIDTH to match screen's aspect ratio
-VIDEO_WIDTH=$((VIDEO_HEIGHT * SCREEN_WIDTH / SCREEN_HEIGHT))
-echo "Adjusted video resolution: ${VIDEO_WIDTH}x${VIDEO_HEIGHT}"
-
 if [ $VIDEO_WIDTH -lt $SCREEN_WIDTH ] || [ $VIDEO_HEIGHT -lt $SCREEN_HEIGHT ]; then
   echo "Enabling upscaling..."
   gamescope \
