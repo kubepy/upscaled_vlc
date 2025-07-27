@@ -33,11 +33,21 @@ function cp_or_symlink() {
   fi
 }
 
+# Install executable script
 mkdir -p ~/.local/bin/
 cp_or_symlink "$PROJECT_DIR/upscaled_vlc.sh" ~/.local/bin/
-mkdir -p ~/.local/share/applications/
-cp_or_symlink "$PROJECT_DIR/com.adilhanney.upscaled_vlc.desktop" ~/.local/share/applications/
+chmod +x ~/.local/bin/upscaled_vlc.sh
+
+# Install icon
 mkdir -p ~/.local/share/icons/hicolor/scalable/apps/
 cp_or_symlink "$PROJECT_DIR/com.adilhanney.upscaled_vlc.svg" ~/.local/share/icons/hicolor/scalable/apps/
+
+# Install desktop entry
+mkdir -p ~/.local/share/applications/
+cp_or_symlink "$PROJECT_DIR/com.adilhanney.upscaled_vlc.desktop" ~/.local/share/applications/
+# Use absolute path for executable in desktop entry
+sed -i "s|Exec=upscaled_vlc.sh|Exec=$HOME/.local/bin/upscaled_vlc.sh|" ~/.local/share/applications/com.adilhanney.upscaled_vlc.desktop
+# Let system know about the new desktop entry
+update-desktop-database ~/.local/share/applications
 
 rm -rf "$TMPDIR"
