@@ -18,6 +18,7 @@ if [ ! -f "$PROJECT_DIR/upscaled_vlc.sh" ]; then
   TMPDIR=$(mktemp -d)
   git clone https://github.com/adil192/upscaled_vlc "$TMPDIR/upscaled_vlc"
   PROJECT_DIR="$TMPDIR/upscaled_vlc"
+  SYMLINK=0 # Don't symlink to temp dir
 else
   echo "Installing from local files"
 fi
