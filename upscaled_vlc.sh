@@ -23,7 +23,7 @@ function check_args() {
     echo "All dependencies are installed :)"
     exit 0
   fi
-  if [ ! -f "$1" ]; then
+  if [ ! -n "$1" ]; then
     echo "File not found: $1"
     exit 2
   fi
@@ -96,16 +96,19 @@ elif [ $(echo "$VIDEO_ASPECT_RATIO < $SCREEN_ASPECT_RATIO" | bc) -eq 1 ]; then
   echo "Adjusted video resolution: ${VIDEO_WIDTH}x${VIDEO_HEIGHT}"
 fi
 
-if [ $VIDEO_WIDTH -lt $SCREEN_WIDTH ] || [ $VIDEO_HEIGHT -lt $SCREEN_HEIGHT ]; then
+#if [ $VIDEO_WIDTH -lt $SCREEN_WIDTH ] || [ $VIDEO_HEIGHT -lt $SCREEN_HEIGHT ]; then
   echo "Enabling upscaling..."
-  gamescope \
+  systemd-run --user --scope -p CPUWeight=100 gamescope --adaptive-sync --custom-refresh-rates 60 \
     -w "$VIDEO_WIDTH" -h "$VIDEO_HEIGHT" \
     -W "$SCREEN_WIDTH" -H "$SCREEN_HEIGHT" \
+    --force-grab-cursor \
+    -S stretch \
     --backend sdl \
     -F fsr \
+    --sharpness 1 \
     -f \
     -- vlc -f "$VIDEO_FILE"
-else
-  echo "Skipping upscaling, using VLC as-is..."
-  vlc -f "$VIDEO_FILE"
-fi
+#else
+#  echo "Skipping upscaling, using VLC as-is..."
+#  vlc "$VIDEO_FILE"
+#fi
